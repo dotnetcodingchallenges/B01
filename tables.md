@@ -29,65 +29,64 @@ The `tables.csv` is a standard CSV file format.
 
 ### Table file format
 
-The table is a list of entries represented by integer numbers. 
+The table is a set of entries represented by integer numbers.  The entry is represented by entry position and the value. 
 
 
 
-Following table represents **Entry** number and it's Value. The Value points to another **Entry**. If the Value is LE (Last Entry) there is no more  
+##### Example table
 
 | Entry |  01  |  02  |  03  |  04  |  05  |  06  |  07  |  08  |  09  |  10  |  11  |  12  |  13  |  14  |  15  |  16  |  17  |  18  |  19  |  20  |
 | :---: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
-| Value |  TM  |  TM  |  04  |  CE  |  06  |  07  |  08  |  09  |  10  |  CE  |  12  |  13  |  LE  |  15  |  11  |  CE  |  16  |  17  |  00  |  CE  |
+| Value |  TM  |  TM  |  04  |  CE  |  06  |  07  |  08  |  09  |  10  |  EC  |  12  |  13  |  LE  |  15  |  11  |  EC  |  16  |  17  |  00  |  EC  |
 
-The example table consist of 20 entries. The entries include 
+The example table consist of 20 entries. The entries includes 
 
 * Table marker (TM)  
 
 * Empty entry
 
-* Chain with Chain End (CE) marker
+* Chain with end of chain (EC) marker
 
   
 
   
 
-##### Table marker
+#### Table marker
 
 The first two entries in the table consist of table marker. 
 
 
 
-##### Empty entry
+#### Empty entry
 
 The table may contain one or more empty entries. The entry is empty when the value is set to zero.
 
 
 
-##### Entry chains
+#### Entry chains
 
-The chain can be composed of one or more entries.  
+The chain can be composed of one or more entries. The example table consist of 5 chains: 
 
-Chain with 2 entries:
 
 ###### 03, 04
 
 | Entry |  01  |  02  |  03  |  04  |  05  |  06  |  07  |  08  |  09  |  10  |  11  |  12  |  13  |  14  |  15  |  16  |  17  |  18  |  19  |  20  |
 | :---: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
-| Value |      |      |  04  |  CE  |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
+| Value |      |      |  04  |  EC  |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
 
-Chain with 6 entries: 
+
 
 ###### 05, 08, 09, 06, 07, 10
 
 | Entry |  01  |  02  |  03  |  04  |  05  |  06  |  07  |  08  |  09  |  10  |  11  |  12  |  13  |  14  |  15  |  16  |  17  |  18  |  19  |  20  |
 | :---: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
-| Value |      |      |      |      |  08  |  07  |  10  |  09  |  06  |  LE  |      |      |      |      |      |      |      |      |      |      |
+| Value |      |      |      |      |  08  |  07  |  10  |  09  |  06  |  EC  |      |      |      |      |      |      |      |      |      |      |
 
-Chain with 4 entries: 
 
 
 ###### 15, 11, 12, 13
+
 | Entry |  01  |  02  |  03  |  04  |  05  |  06  |  07  |  08  |  09  |  10  |  11  |  12  |  13  |  14  |  15  |  16  |  17  |  18  |  19  |  20  |
 | :---: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
-| Value |      |      |      |      |      |      |      |      |      |      |  12  |  13  |  LE  |      |  11  |      |      |      |      |      |
+| Value |      |      |      |      |      |      |      |      |      |      |  12  |  13  |  EC  |      |  11  |      |      |      |      |      |
 
