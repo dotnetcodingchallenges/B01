@@ -1,36 +1,51 @@
 # F001
 
 
-The task is divided into three parts
-
-* Decode and Validate
-* Parse and Search 
-* Read and Iterate
+* Provide solution as console application
+* You are allowed to use nuggets to handle command line parsing or logging
 
 
 
-### Decode 
+1. Create three table files which content is stored in each row of the provided CSV file.
+2. Find all the chains and provide first entry index in text file.  
+3.   
+
+
+
+The task is divided into three stages
+
+
+
+Three features
+
+* decode
+* find
+* read
+
+
+
+
+### Stage 1 
+###### Decode and Validate
 
 `F001.exe decode --csv tables.csv`
 
 
+### Stage 2
+###### Parse and Search
 
 
-### Parse
 
-
-`F001.exe parse --input table.bin --output entries.lst`
+`F001.exe find --input table.bin --output entries.lst`
 
 * Detect table entry size - 12 bit, 16 bit or 32 bit
 * 
 
 
 
+### Stage 3
+###### Read 
 
-
-
-
-### Read 
 
 
 `F001.exe read --input entries.lst --output chains.txt`
