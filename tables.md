@@ -19,24 +19,23 @@ The CSV file consist of 7 columns:
 | MD5     | string  | Content's MD5               |
 | Content | string  | Base64 encoded file content |
 
-The *Size*, *SHA256*, *SHA1*, *MD5* are provided to validate the new table file created from decoded *Content* and saved as *Name* .  
+The *Size*, *SHA256*, *SHA1*, *MD5* are provided to validate the new table file created from decoded *Content* and saved as *Name*.  
 The *Bits* column is informational and provides table entry size in bits.
 
 
 
 ### Table file 
 
-The table file is a binary file. The file consist of integer numbers stored one after another. The integer numbers have fixed size within the table file. 
-
-There are three types of table files: 12, 16 and 32 bits.  The table file type can be recognized by table marker.  
-
-| Entry Size | Description         | Table Marker           |
-| ---------- | ------------------- | ---------------------- |
-| 12 bit     | 1.5 bytes per entry | 0xFF0, 0xFFF           |
-| 16 bit     | 2 bytes per entry   | 0xFFF8, 0xFFFF         |
-| 32 bit     | 4 bytes per entry   | 0x0FFFFFF8, 0xFFFFFFFF |
+The table file is a binary file. The file consist of integer numbers of a fixed bit length stored one after another in little endian byte order. There are three fixed bit lengths of the integer values: 12, 16 and 32 bits. 
 
 
+| Entry Size | Description       | Table Marker           |
+| ---------- | ----------------- | ---------------------- |
+| 12 bit     | 12 bits per entry | 0xFF0, 0xFFF           |
+| 16 bit     | 2 bytes per entry | 0xFFF8, 0xFFFF         |
+| 32 bit     | 4 bytes per entry | 0x0FFFFFF8, 0xFFFFFFFF |
+
+The table file type can be recognized by table marker stored in the first two entries of the table file. 
 
 #### Table
 
@@ -129,12 +128,12 @@ The example table above consist of 5 chains:
 First five values of 12 bit entries
 
 ```
-A		1		 2		     3	     	4		 5			 6			7		 8
-B		11110000 1111	1111 11111111	00000011 0100	0000 00000000	00000101 0110	0000
-C		1111 11110000	11111111 1111	0000 00000011	00000000 0100	0000 00000101	
-D		F F0			FF F			0 03			00 4			0 05
-E		0xFF0			0xFFF			0x3				0x4				0x5
-F		4080			4095			3				4				5
+A    1        2           3          4        5           6          7        8
+B    11110000 1111   1111 11111111   00000011 0100   0000 00000000   00000101 0110   0000
+C    1111 11110000   11111111 1111   0000 00000011   00000000 0100   0000 00000101   
+D    F    F0         FF       F      0    03         00       4      0    05
+E    0xFF0           0xFFF           0x3             0x4             0x5
+F    4080            4095            3               4               5
 ```
 
 ##### 16 bit
@@ -142,12 +141,12 @@ F		4080			4095			3				4				5
 First five values of 16 bit entries 
 
 ```
-A		1		 2			3		 4			5		 6			7		 8			9		 10
-B		11111000 11111111	11111111 11111111	00000000 00000000	00000101 00000000	00000110 00000000
-C		11111111 11111000	11111111 11111111	00000000 00000000	00000000 00000101	00000000 00000110
-D		FF F8				FF FF				00 00				00 05				00 06
-E		0xFFF8				0xFFFF				0x0					0x5					0x6
-F		65528				65536				0					5					6
+A    1        2          3        4          5        6          7        8          9        10
+B    11111000 11111111   11111111 11111111   00000000 00000000   00000101 00000000   00000110 00000000
+C    11111111 11111000   11111111 11111111   00000000 00000000   00000000 00000101   00000000 00000110
+D    FF       F8         FF       FF         00       00         00       05         00       06
+E    0xFFF8              0xFFFF              0x0                 0x5                 0x6
+F    65528               65536               0                   5                   6
 ```
 
 ##### 32 bit
@@ -155,24 +154,24 @@ F		65528				65536				0					5					6
 First two values in 32 bit entries
 
 ```
-A		1		 2        3        4         5        6	       7		8			
-B		11111000 11111111 11111111 00001111	 11111111 11111111 11111111 11111111	
-C		11111111 11111111 11111111 11111000	 11111111 11111111 11111111 11111111	
-D		0F FF FF F8			                 FF FF FF FF
-E		0x0FFFFFF8		 					 0xFFFFFFFF		
-F		268435448							 4294967295
+A    1        2        3        4          5        6        7        8			
+B    11111000 11111111 11111111 00001111   11111111 11111111 11111111 11111111	
+C    00001111 11111111 11111111 11111000   11111111 11111111 11111111 11111111	
+D    0F       FF       FF       F8         FF       FF       FF       FF
+E    0x0FFFFFF8                            0xFFFFFFFF		
+F    268435448                             4294967295
 ```
 
 
 
 
 
-| Row  | Description                                         |
-| :--: | --------------------------------------------------- |
-|  A   | Byte number                                         |
-|  B   | Bits in little endian byte order.                   |
-|  C   | Bits in reversed byte order                         |
-|  D   | Hexadecimal representation of the n-bit entry value |
-|  E   | Entry value in hex                                  |
-|  F   | Entry value                                         |
+| Row  | Description                      |
+| :--: | -------------------------------- |
+|  A   | Byte number                      |
+|  B   | Bits in little endian byte order |
+|  C   | Bits in reversed byte order      |
+|  D   | Row C byte value (hex)           |
+|  E   | Entry value (hex)                |
+|  F   | Entry value (dec)                |
 
